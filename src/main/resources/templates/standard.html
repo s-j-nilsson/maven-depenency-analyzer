@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dependency analyzer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../static/css/standard.css" th:href="@{/css/standard.css}" />
+</head>
+<body>
+<h1>Dependency analyzer</h1>
+    <ul th:each="element : ${dependencies}">
+        <il class="resource" th:text="${element.key}">key</il>
+            <ul th:each="versionMapElement : ${element.value}">
+                <il class="version" th:text="${versionMapElement.key}">versionMapKey</il>
+                <ul th:each="app : ${versionMapElement.value}">
+                <il class="app" th:text="${app}">Some name</il>
+                </ul>
+            </ul>
+    </ul>
+</body>
+</html>
