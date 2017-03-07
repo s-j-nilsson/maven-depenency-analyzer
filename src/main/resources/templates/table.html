@@ -16,7 +16,7 @@
         <tr>
             <td th:text="${element.key}"></td>
             <tr th:each="versionMapElement : ${element.value}">
-                <td th:text="${versionMapElement.key}"></td>
+                <td class="version" th:text="${versionMapElement.key}"></td>
                 <td >
                     <div th:each="app : ${versionMapElement.value}" th:remove="tag">
                         <div th:text="${app}"></div>
