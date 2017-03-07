@@ -12,18 +12,21 @@
 <h1>Dependency analyzer</h1>
 
 <table id="dependenciestable" class="display" >
+
     <div th:each="element : ${dependencies}" th:remove="tag">
+        <div th:each="versionMapElement : ${element.value}" th:remove="tag">
         <tr>
             <td th:text="${element.key}"></td>
-            <tr th:each="versionMapElement : ${element.value}">
+
                 <td class="version" th:text="${versionMapElement.key}"></td>
                 <td >
                     <div th:each="app : ${versionMapElement.value}" th:remove="tag">
                         <div th:text="${app}"></div>
                     </div>
                 </td>
-            </tr>
+
         </tr>
+        </div>
     </div>
 </table>
 </body>
