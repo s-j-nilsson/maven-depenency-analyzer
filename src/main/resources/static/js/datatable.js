@@ -1,7 +1,8 @@
 $(document).ready(function() {
   var table = $('#dependenciestable').DataTable({
                                                   "columnDefs": [
-                                                    { "visible": false, "targets": 0 }
+                                                    { "visible": false, "targets": 0 },
+                                                    { "orderable": false, "targets": ["_all"]}
                                                   ],
                                                   "order": [[ 0, 'asc' ]],
                                                   "displayLength": 25,
