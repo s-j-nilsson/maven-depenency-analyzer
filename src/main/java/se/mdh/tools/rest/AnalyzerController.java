@@ -35,7 +35,7 @@ public class AnalyzerController {
     model.addAttribute("dependencies", dependencies);
     return "standard";
   }
-  @RequestMapping("/table")
+  @RequestMapping("")
   public String printDependenciesTable(Model model) throws IOException, URISyntaxException {
     long start = System.currentTimeMillis();
     Map<String, Map<String, List<String>>> dependencies = analyzerService.getDependencies();
