@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import se.mdh.tools.rest.RestClient;
 
 /**
- * Created by johan on 2017-03-05.
+ * A class that ties together the controller and the rest client.
  */
 @Service
 public class AnalyzerService {
@@ -27,7 +27,7 @@ public class AnalyzerService {
 
   /**
    * Get a map representation for the dependencies.
-   * @return
+   * @return All the dependencies represented as a Map
    * @throws IOException
    */
   public Map<String, Map<String, List<String>>> getDependencies() throws IOException {

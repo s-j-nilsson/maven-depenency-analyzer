@@ -1,3 +1,8 @@
 .resource {
   font-weight: bold;
 }
+
+tr.group,
+tr.group:hover {
+  background-color: #ddd !important;
+}

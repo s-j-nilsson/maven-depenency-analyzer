@@ -13,14 +13,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 /**
  * Created by johan on 2017-02-19.
  * Hanterar alla anrop mot andra system.
  */
-@Controller
+@Component
 public class RestClient {
   private static final Log log = LogFactory.getLog(RestClient.class);
 
@@ -35,9 +35,6 @@ public class RestClient {
 
   @Value("${analyzer.data.resource}")
   String dataResource;
-
-  public RestClient() {
-  }
 
   /**
    * Get the Jenkins depenencies resource

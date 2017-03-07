@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+    <title>Dependency analyzer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../static/css/standard.css" th:href="@{/css/standard.css}" />
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css"/>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.min.js"></script>
+    <script src="/js/datatable.js"></script>
+</head>
+<body>
+<h1>Dependency analyzer</h1>
+
+<table id="dependenciestable" class="display" >
+    <div th:each="element : ${dependencies}" th:remove="tag">
+        <tr>
+            <td th:text="${element.key}"></td>
+            <tr th:each="versionMapElement : ${element.value}">
+                <td th:text="${versionMapElement.key}"></td>
+                <td >
+                    <div th:each="app : ${versionMapElement.value}" th:remove="tag">
+                        <div th:text="${app}"></div>
+                    </div>
+                </td>
+            </tr>
+        </tr>
+    </div>
+</table>
+</body>
+</html>

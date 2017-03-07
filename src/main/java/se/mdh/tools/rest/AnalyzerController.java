@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import se.mdh.tools.service.AnalyzerService;
 
 /**
- * Created by johan on 2017-03-05.
+ * The controller class for the analyzer.
  */
 @Controller
 @RequestMapping("/analyzer")
 public class AnalyzerController {
   private static final Log log = LogFactory.getLog(AnalyzerController.class);
-
 
   private AnalyzerService analyzerService;
 
@@ -35,5 +34,15 @@ public class AnalyzerController {
 
     model.addAttribute("dependencies", dependencies);
     return "standard";
+  }
+  @RequestMapping("/table")
+  public String printDependenciesTable(Model model) throws IOException, URISyntaxException {
+    long start = System.currentTimeMillis();
+    Map<String, Map<String, List<String>>> dependencies = analyzerService.getDependencies();
+    long stop = System.currentTimeMillis();
+    log.info("Getting files from Jenkins took " + (stop - start) + " ms");
+
+    model.addAttribute("dependencies", dependencies);
+    return "table";
   }
 }
