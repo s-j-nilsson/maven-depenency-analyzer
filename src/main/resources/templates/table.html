@@ -16,8 +16,16 @@
 <body>
 <h1>Dependency analyzer</h1>
 
-<table id="dependenciestable" class="display" >
+<div id="analyzed_jobs">
+    <div id="heading">Analyzing jobs:</div>
+    <div id="filtered_jobs" th:switch="${isFiltered}" th:remove="tag">
+        <div th:case="true" th:text="${filter}"></div>
+        <div th:case="*">All Jenkins jobs that expose their maven dependencies</div>
+    </div>
+</div>
 
+
+<table id="dependenciestable" class="display" >
     <div th:each="element : ${dependencies}" th:remove="tag">
         <div th:each="versionMapElement : ${element.value}" th:remove="tag">
         <tr>
@@ -29,7 +37,6 @@
                         <div th:text="${app}"></div>
                     </div>
                 </td>
-
         </tr>
         </div>
     </div>

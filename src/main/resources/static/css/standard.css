@@ -10,3 +10,13 @@ tr.group:hover {
 td.version {
   vertical-align:top;
 }
+
+#analyzed_jobs {
+  background: beige;
+  margin: 1em 0;
+  padding: 1em;
+}
+
+#analyzed_jobs #heading {
+  font-weight: bold;
+}
