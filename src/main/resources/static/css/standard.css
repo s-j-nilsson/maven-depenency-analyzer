@@ -17,6 +17,10 @@ td.version {
   padding: 1em;
 }
 
-#analyzed_jobs #heading {
+#analyzed_jobs_title, #missing_filter_title {
   font-weight: bold;
+}
+
+#missing_filter_title {
+  margin-top: 1em;
 }

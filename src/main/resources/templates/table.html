@@ -17,11 +17,13 @@
 <h1>Dependency analyzer</h1>
 
 <div id="analyzed_jobs">
-    <div id="heading">Analyzing jobs:</div>
-    <div id="filtered_jobs" th:switch="${isFiltered}" th:remove="tag">
-        <div th:case="true" th:text="${filter}"></div>
-        <div th:case="*">All Jenkins jobs that expose their maven dependencies</div>
+    <div id="analyzed_jobs_title">Analyzed jobs</div>
+    <div th:switch="${isFiltered}" th:remove="tag">
+        <div id="filtered_jobs" th:case="true" th:text="${filter}"></div>
+        <div id="filtered_jobs" th:case="*">All Jenkins jobs that expose their maven dependencies</div>
     </div>
+    <div id="missing_filter_title" th:if="${not #strings.isEmpty(missingFilter)}">Jobs that do not expose dependencies</div>
+    <div id="missing_filter" th:if="${not #strings.isEmpty(missingFilter)}" th:text="${missingFilter}"></div>
 </div>
 
 

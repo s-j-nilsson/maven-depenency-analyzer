@@ -59,6 +59,7 @@ public class AnalyzerController {
     model.addAttribute("dependencies", dependencyResponse.getDependencyMap());
     model.addAttribute("isFiltered", isFiltered());
     model.addAttribute("filter", jobnameFilter);
+    model.addAttribute("missingFilter", getJobNamesWithoutDependenciesExposed(dependencyResponse));
   }
 
   /**
@@ -72,5 +73,17 @@ public class AnalyzerController {
       filtered = true;
     }
     return filtered;
+  }
+
+  private String getJobNamesWithoutDependenciesExposed(DependencyResponse dependencyResponse) {
+    List<String> jobNamesWithoutDependenciesExposed = new ArrayList();
+    List<String> jobsIncluded = dependencyResponse.getJobsIncluded();
+    List<String> jobNameFilterList = Arrays.asList(jobnameFilter.split("\\s*,\\s*"));
+    for(String jobName : jobNameFilterList) {
+      if(!jobsIncluded.contains(jobName)) {
+        jobNamesWithoutDependenciesExposed.add(jobName);
+      }
+    }
+    return String.join(", ", jobNamesWithoutDependenciesExposed);
   }
 }
