@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import org.springframework.stereotype.Service;
@@ -42,7 +44,7 @@ public class AnalyzerService {
 
       if(!entryName.startsWith("META")) {
         String resourceName = entryName.substring(0, entryName.indexOf("-dependencyList.txt"));
-        if(jobnameFilter.isEmpty() || jobnameFilter.contains(resourceName)) {
+        if(isAccepted(jobnameFilter, resourceName)) {
           dependencyResponse.addJobIncluded(resourceName);
           Scanner sc = new Scanner(zipIn);
           sc.nextLine();
@@ -86,5 +88,21 @@ public class AnalyzerService {
     dependencyResponse.setDependencyMap(mainMap);
 
     return dependencyResponse;
+  }
+
+  private boolean isAccepted(List<String> jobnameFilter, String resourceName) {
+    if(jobnameFilter.isEmpty() || jobnameFilter.contains(resourceName)) {
+      return true;
+    }
+
+    for(String filterString : jobnameFilter) {
+      Pattern p = Pattern.compile(filterString, Pattern.CASE_INSENSITIVE);
+      Matcher m = p.matcher(resourceName);
+
+      if (m.matches()) {
+        return true;
+      }
+    }
+    return false;
   }
 }

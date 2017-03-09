@@ -4,7 +4,12 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,11 +37,6 @@ public class AnalyzerController {
     this.analyzerService = analyzerService;
   }
 
-  @RequestMapping("/standard")
-  public String printDependencies(Model model) throws IOException, URISyntaxException {
-    populateModel(model);
-    return "standard";
-  }
   @RequestMapping("")
   public String printDependenciesTable(Model model) throws IOException, URISyntaxException {
     populateModel(model);
@@ -76,14 +76,29 @@ public class AnalyzerController {
   }
 
   private String getJobNamesWithoutDependenciesExposed(DependencyResponse dependencyResponse) {
-    List<String> jobNamesWithoutDependenciesExposed = new ArrayList();
+    Map<String, Boolean> matchingMap = new HashMap<>();
+
     List<String> jobsIncluded = dependencyResponse.getJobsIncluded();
     List<String> jobNameFilterList = Arrays.asList(jobnameFilter.split("\\s*,\\s*"));
-    for(String jobName : jobNameFilterList) {
-      if(!jobsIncluded.contains(jobName)) {
-        jobNamesWithoutDependenciesExposed.add(jobName);
+
+    for(String jobNameFilter : jobNameFilterList) {
+      matchingMap.put(jobNameFilter, Boolean.FALSE);
+    }
+
+    for(String jobIncluded : jobsIncluded) {
+      for(String key : matchingMap.keySet()) {
+        Pattern p = Pattern.compile(key, Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(jobIncluded);
+        if (m.matches()) {
+          matchingMap.put(key, Boolean.TRUE);
+        }
       }
     }
-    return String.join(", ", jobNamesWithoutDependenciesExposed);
+
+    List<String> jobNamesWithoutDependenciesExposedList = matchingMap.keySet().stream()
+        .filter(k -> !matchingMap.get(k))
+        .collect(Collectors.toList());
+
+    return String.join(", ", jobNamesWithoutDependenciesExposedList);
   }
 }
