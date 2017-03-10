@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+</head>
+
+<body>
+<table th:fragment="dependenciestable" id="dependenciestable" class="display" >
+    <div th:each="element : ${dependencies}" th:remove="tag">
+        <div th:each="versionMapElement : ${element.value}" th:remove="tag">
+            <tr>
+                <td th:text="${element.key}"></td>
+
+                <td class="version" th:text="${versionMapElement.key}"></td>
+                <td >
+                    <div th:each="app : ${versionMapElement.value}" th:remove="tag">
+                        <div th:text="${app}"></div>
+                    </div>
+                </td>
+            </tr>
+        </div>
+    </div>
+</table>
+</body>
+</html>
