@@ -30,9 +30,6 @@ public class RestClient {
   @Value("${jenkins.password}")
   String password;
 
-  @Value("${analyzer.base.uri}")
-  String baseUri;
-
   @Value("${analyzer.data.resource}")
   String dataResource;
 
@@ -51,7 +48,7 @@ public class RestClient {
     httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM));
     HttpEntity<String> entity = new HttpEntity<>("parameters", httpHeaders);
 
-    ResponseEntity<byte[]> responseEntity = restTemplate.exchange(baseUri + dataResource, HttpMethod.GET, entity, byte[].class);
+    ResponseEntity<byte[]> responseEntity = restTemplate.exchange(dataResource, HttpMethod.GET, entity, byte[].class);
 
     ZipInputStream zipIn = new ZipInputStream(new ByteArrayInputStream(responseEntity.getBody()));
     return zipIn;
