@@ -28,3 +28,12 @@ td.version {
 #searchfilter {
   width: 100%;
 }
+
+.search-block input[type="submit"] {
+  float: right;
+}
+
+.searchfilter_wrapper {
+  overflow: hidden;
+  padding-right: .5em;
+}

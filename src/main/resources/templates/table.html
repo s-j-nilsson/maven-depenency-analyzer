@@ -21,7 +21,10 @@
 
     <form action="/analyzer" method="post" >
     <div class="search-block">
-        <input type="text" name="searchfilter" id="searchfilter" th:value="${filter}"/>
+        <input type="submit" value="Search" />
+        <div class="searchfilter_wrapper">
+            <input type="text" name="searchfilter" id="searchfilter" th:value="${filter}" />
+        </div>​
     </div>
     </form>
 
