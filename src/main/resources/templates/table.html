@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="../static/css/standard.css" th:href="@{/css/standard.css}" />
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
     <script
-            src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-            integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 
@@ -17,16 +17,20 @@
 <h1>Dependency analyzer</h1>
 
 <div id="analyzed_jobs">
-    <div id="analyzed_jobs_title">Analyzed jobs</div>
-    <div th:switch="${isFiltered}" th:remove="tag">
-        <div id="filtered_jobs" th:case="true" th:text="${filter}"></div>
-        <div id="filtered_jobs" th:case="*">All Jenkins jobs that expose their maven dependencies</div>
+    <div id="analyzed_jobs_title">Filter</div>
+
+    <form action="/analyzer" method="post" >
+    <div class="search-block">
+        <input type="text" name="searchfilter" id="searchfilter" th:value="${filter}"/>
     </div>
+    </form>
+
     <div id="missing_filter_title" th:if="${not #strings.isEmpty(missingFilter)}">Jobs that do not expose dependencies</div>
     <div id="missing_filter" th:if="${not #strings.isEmpty(missingFilter)}" th:text="${missingFilter}"></div>
 </div>
 
-
-<div th:replace="assets :: dependenciestable"></div>
+<div id="resultsBlock">
+    <div th:replace="assets :: dependenciestable"></div>
+</div>
 </body>
 </html>

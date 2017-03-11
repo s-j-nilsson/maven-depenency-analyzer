@@ -24,3 +24,7 @@ td.version {
 #missing_filter_title {
   margin-top: 1em;
 }
+
+#searchfilter {
+  width: 100%;
+}
