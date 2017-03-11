@@ -38,7 +38,7 @@ public class AnalyzerController {
   @RequestMapping("")
   public String printDependenciesTable(Model model, @RequestParam("searchfilter") Optional<String> searchfilter) throws IOException, URISyntaxException {
     if(searchfilter.isPresent()) {
-      populateModel(model, searchfilter.get());
+      populateModel(model, searchfilter.get().replaceAll(" ", "")); // remove any whitespaces
     } else {
       populateModel(model, "");
     }
