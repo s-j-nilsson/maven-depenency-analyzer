@@ -27,6 +27,7 @@
     <spring-boot-starter-parent.version>1.5.1.RELEASE</spring-boot-starter-parent.version>
     <maven-bundle-plugin.version>2.3.7</maven-bundle-plugin.version>
     <spring-boot-maven-plugin.version>1.5.1.RELEASE</spring-boot-maven-plugin.version>
+    <httpclient.version>4.5.3</httpclient.version>
   </properties>
 
   <dependencyManagement>
@@ -52,12 +53,6 @@
       <scope>test</scope>
     </dependency>
 
-    <!--<dependency>-->
-      <!--<groupId>com.offbytwo.jenkins</groupId>-->
-      <!--<artifactId>jenkins-client</artifactId>-->
-      <!--<version>0.3.7</version>-->
-    <!--</dependency>-->
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -66,6 +61,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${httpclient.version}</version>
     </dependency>
   </dependencies>
 

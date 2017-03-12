@@ -33,14 +33,18 @@ public class RestClient {
   @Value("${analyzer.data.resource}")
   String dataResource;
 
+  private RestTemplate restTemplate;
+
+  public RestClient(RestTemplate restTemplate) {
+    this.restTemplate = restTemplate;
+  }
+
   /**
    * Get the Jenkins depenencies resource
    * @return
    * @throws IOException
    */
   public ZipInputStream getDependenciesInputStream() throws IOException {
-
-    RestTemplate restTemplate = new RestTemplate();
 
     restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(username, password));
 
