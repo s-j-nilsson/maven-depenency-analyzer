@@ -1,5 +1,6 @@
 $(document).ready(function() {
   var table = $('#dependenciestable').DataTable({
+                                                  responsive: true,
                                                   "columnDefs": [
                                                     { "visible": false, "targets": 0 },
                                                     { "orderable": false, "targets": ["_all"]}
