@@ -52,7 +52,7 @@ public class AnalyzerService {
           while (sc.hasNextLine()) {
             String dependencyString = sc.nextLine();
 
-            if(!"".equals(dependencyString)) {
+            if(!"".equals(dependencyString) && !"none".equals(dependencyString.trim())) {
               String[] split = dependencyString.split(":");
               String version = split[split.length - 2];
               String groupId = split[0];
